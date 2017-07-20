@@ -1,0 +1,4 @@
+rootProject.name = 'kt-extensions'
+include 'gson'
+include 'lang'
+
