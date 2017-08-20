@@ -1,3 +1,5 @@
+package kt.extensions
+
 import org.junit.Assert
 import org.junit.Test
 
@@ -39,5 +41,27 @@ class LangKtTest {
 
         // THEN
         Assert.assertEquals(ValuesForTest.LIST_ELEMENT, result)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `employee name is null`() {
+        // GIVEN
+        // this imitates a GSON parsing process
+        val employee = EmployeeFactory.createEmployeeWithoutName()
+//        the problem in this case that the compiler gonna
+//        ignore ? anyway so there will be a NullPointerException
+//        employee.name?.apply {
+//            print(length)
+//        }
+
+        // WHEN
+
+        employee.name.letIfNotNull {
+            with(it) {
+                println(length)
+
+            }
+        }.ifNull { throw IllegalArgumentException("lol") }
+        // THEN IllegalArgumentException
     }
 }

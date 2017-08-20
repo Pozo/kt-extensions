@@ -1,3 +1,5 @@
+package kt.extensions
+
 @Target(AnnotationTarget.FUNCTION,
         AnnotationTarget.PROPERTY,
         AnnotationTarget.PROPERTY_GETTER,
@@ -18,6 +20,14 @@ inline fun <T, R> T?.runIfNotNull(block: T.() -> R): R? {
         block()
     }
 }
+
+@InlineOnly
+inline fun <T, R> T.letIfNotNull(block: (T) -> R): R? {
+    return this?.let {
+        block(this)
+    }
+}
+
 @InlineOnly
 inline fun <T> T?.ifNull(function: () -> T): T {
     if (this != null) {
