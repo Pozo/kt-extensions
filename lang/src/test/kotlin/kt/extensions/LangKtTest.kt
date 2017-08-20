@@ -57,11 +57,25 @@ class LangKtTest {
         // WHEN
 
         employee.name.letIfNotNull {
-            with(it) {
-                println(length)
-
-            }
+            it
         }.ifNull { throw IllegalArgumentException("lol") }
         // THEN IllegalArgumentException
+    }
+
+    @Test
+    fun `employee name is not null`() {
+        // GIVEN
+        val defaultValue = "b"
+        val employee = EmployeeFactory.createEmployee()
+        // WHEN
+
+        val name = employee.name.letIfNotNull {
+            it
+        }.ifNull {
+            defaultValue
+        }
+
+        // THEN
+        Assert.assertEquals(EmployeeFactory.EMPLOYEE_NAME, name)
     }
 }

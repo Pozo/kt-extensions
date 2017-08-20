@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 public class EmployeeFactory {
 
+    static final String EMPLOYEE_NAME = "Bela";
+
     public static Employee createEmployeeWithoutName() throws NoSuchFieldException, IllegalAccessException {
         Employee employee = new Employee("", 10);
         Class<? extends Employee> aClass = employee.getClass();
@@ -14,6 +16,6 @@ public class EmployeeFactory {
     }
 
     public static Employee createEmployee() throws NoSuchFieldException, IllegalAccessException {
-        return new Employee("Bela", 10);
+        return new Employee(EMPLOYEE_NAME, 10);
     }
 }
